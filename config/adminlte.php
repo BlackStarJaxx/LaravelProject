@@ -141,24 +141,16 @@ return [
         [
             'text'        => 'Companies',
             'url'         => 'admin/companies',
-            'icon'        => 'far fa-file',
-            'label'       => 1,
+            'icon'        => 'fas fa-archive',
             'label_color' => 'success',
         ],
         [
             'text'        => 'Employees',
-            'url'         => '/',
-            'icon'        => 'far fa-file',
-            'label'       => 4,
+            'url'         => 'admin/employees',
+            'icon'        => 'fas fa-address-card',
             'label_color' => 'success',
         ],
-        [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
+
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

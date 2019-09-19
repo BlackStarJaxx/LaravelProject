@@ -3,9 +3,9 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Welcome to my test Task guys</h1>
 @stop
 
 @section('content')
-    <p>You are logged in!</p>
+    <p>Loot this shit plz ;)</p>
 @stop

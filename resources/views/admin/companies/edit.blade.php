@@ -1,10 +1,13 @@
-@extends('admin/companies')
+@extends('home')
 
-{{--@section('content_header')--}}
-{{--    <h1>Companies</h1>--}}
-{{--@stop--}}
+@section('content_header')
+    <h1>Companies</h1>
+@stop
 
 @section('content')
+    <div align="right">
+        <a href="{{route('admin.companies.index')}}" class="btn btn-default">Back</a>
+    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -12,12 +15,18 @@
                     <div class="card-header">Edit Company</div>
 
                     <div class="card-body">
-                        <form method="post" action="{{route('admin.companies.update', $company->id) }}">
-                            {{method_field('PUT')}}
-                            @csrf
+                        <form method="POST" action="{{route('admin.companies.update', $companies->id) }}">
 
+                            @csrf
+                            @method('PATCH')
                             Name:
-                            <input type="name" name="name" value="{{$company->name}}"    class="form-control" />
+                            <input type="text" name="name" value="{{$companies->name}}" class="form-control" />
+                            Email:
+                            <input type="text" name="email" value="{{$companies->surname}}" class="form-control" />
+                            Logo:
+                            <input type="text" name="logo" value="{{$companies->company}}" class="form-control" />
+                            WebSite:
+                            <input type="text" name="website" value="{{$companies->email}}" class="form-control" />
                             <br />
                             <input type="submit" value="Save" class="btn btn-primary" />
 
@@ -29,6 +38,4 @@
         </div>
     </div>
 @endsection
-
-
 

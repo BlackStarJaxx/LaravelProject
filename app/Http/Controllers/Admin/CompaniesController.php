@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Companies;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 class CompaniesController extends Controller
 {
     /**
@@ -14,9 +15,12 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        $companies = Companies::all();
-        return view('admin.companies.index', compact('companies'));
+        $data=Companies::latest()->paginate(10);
+        return view('admin.companies.index' , compact('data'))
+            ->with('i',(request()->input('page', 1) -1) *10);
 
+//        $companies = Companies::all();
+//        return view('admin.companies.index', compact('companies'));
     }
 
     /**
@@ -30,16 +34,31 @@ class CompaniesController extends Controller
     }
 
     /**
-     * Store a newly created resource in  storage.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        Companies::create($request->all);
-        return redirect()->route('admin.companies.index');
+        {
+            $request->validate([
+                'name'         =>    'required',
+                'email'        =>    'required',
+                'logo'         =>    'required',
+                'website'      =>    'required'
 
+            ]);
+            $form_data = array(
+                'name'    => $request->name,
+                'email'   => $request->email,
+                'logo'    => $request->logo,
+                'website' => $request->website
+            );
+            Companies::create($form_data);
+            return redirect()->route('admin.companies.index')
+                ->with('success', 'Data Added successfully!');
+        }
     }
 
     /**
@@ -74,7 +93,8 @@ class CompaniesController extends Controller
     public function update(Request $request, Companies $companies)
     {
         $companies->update($request->all());
-        return redirect()->route('admin.companies.index');
+        return redirect()->route('admin.companies.index')
+            ->with('success', 'Data is successfully updated!');
     }
 
     /**
@@ -85,8 +105,8 @@ class CompaniesController extends Controller
      */
     public function destroy(Companies $companies)
     {
-        $companies-> delete ();
-        return redirect()->route('admin.companies.index');
-
+        $companies-> delete();
+        return redirect()->route('admin.companies.index')
+            ->with('success', 'Data is successfully delete!');
     }
 }
