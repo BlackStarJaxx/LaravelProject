@@ -2,109 +2,73 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Company;
 use App\Employee;
+use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
 class EmployeeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $data=Employee::latest()->paginate(10);
+        $data=Employee::latest()->paginate(100);
         return view('admin.employees.index' , compact('data'))
-            ->with('i',(request()->input('page', 1) -1) *10);
+            ->with((request()->input('page')));
 
-
-        $employees = Employee::all();
-        return view('admin.employees.index', compact('employees'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('admin.employees.create');
+        $companies=Company::all();
+
+        return view('admin.employees.create', ["companies"=>$companies]);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(StoreEmployeeRequest $request)
     {
-        $request->validate([
-            'name'       =>    'required',
-            'surname'    =>    'required',
-            'company'    =>    'required',
-            'email'      =>    'required',
-            'phone'      =>    'required'
-            ]);
-        $form_data = array(
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'company' => $request->company,
-            'email' => $request->email,
-            'phone' =>$request->phone
-        );
+          $form_data = $request->validated();
+          $form_data[
+              "company_id"
+
+              ] = $request->validated()['company'];
+
+
           Employee::create($form_data);
           return redirect()->route('admin.employees.index')
               ->with('success', 'Data Added successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
     public function show(Employee $employee)
     {
         $data = Employee::findOrfail($employee);
         return view('admin.employees.show',compact('data'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Employee $employee)
     {
-        return view('admin.employees.edit',compact('employee'));
+        $companies=Company::all();
+
+        return view('admin.employees.edit',compact('employee', 'companies'));
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Employee $employee)
+    public function update(UpdateEmployeeRequest $request, Employee $employee)
     {
-        $employee->update($request->all());
+        $form_data = $request->validated();
+        $form_data[
+        "company_id"
+
+        ] = $request->validated()['company'];
+
+        $employee->update($form_data);
         return redirect()->route('admin.employees.index')
             ->with('success', 'Data is successfully updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Employee $employee)
     {
         $employee-> delete();

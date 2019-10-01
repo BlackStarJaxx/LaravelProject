@@ -24,7 +24,7 @@
                         <a href="{{route('admin.employees.create')}}" class="btn btn-sm btn-primary">Add New </a>
                         <br /><br />
 
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover" id="table">
                             <tr>
                                 <th>Name</th>
                                 <th>Surname</th>
@@ -38,12 +38,12 @@
                                 <tr>
                                      <td>{{$employee->name}}</td>
                                      <td>{{$employee->surname}}</td>
-                                     <td>{{$employee->company}}</td>
+                                     <td>{{$employee->companies->name}}</td>
                                      <td>{{$employee->email}}</td>
                                      <td>{{$employee->phone}}</td>
-                                       
+
                                     <td>
-{{--                                        <a href="{{route('admin.employees.show', $employee->id)}}" class="btn btn-primary">Show</a>*/--}}
+{{--                                        <a href="{{route('admin.employees.show', $employee->id)}}" class="btn btn-primary">Show</a>--}}
                                         <a href="{{route('admin.employees.edit',$employee->id)}}"
                                            class="btn btn-sm btn-info">Edit</a>
                                         <form method="POST" action="{{route('admin.employees.destroy', $employee->id)}}">
@@ -60,7 +60,8 @@
                             </tr>
                           @endforelse
                         </table>
-                        {!! $data->links() !!}
+
+
                     </div>
                 </div>
             </div>

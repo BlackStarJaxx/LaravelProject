@@ -4,15 +4,15 @@
 @stop
 
 @section('content')
-    {{--    if($erros->any())--}}
-    {{--        <div class="alert alert-danger">--}}
-    {{--            <ul>--}}
-    {{--                @foreach($errors ->all() as $error)--}}
-    {{--                    <li>{{ $error }} </li>--}}
-    {{--                @endforeach--}}
-    {{--            </ul>--}}
-    {{--        </div>--}}
-    {{--    @endif--}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div><br />
+    @endif
 
     <div align="right">
         <a href="{{route('admin.companies.index')}}" class="btn btn-default">Back</a>
@@ -24,25 +24,19 @@
                     <div class="card-header">Add New Company</div>
                     <br/>
                     <div class="card-body">
-                        <form method="POST" action="{{route('admin.companies.store')}}" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('admin.companies.store')}}"  role="form" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
-                                <label class="col-md-4 text-right">Name:</label>
+                                <label for="name" class="col-md-4 text-right">Name:</label>
                                 <div class="col-md-8">
-                                    <input type="text" name="name" class="form-control input-lg" />
+                                    <input  type="text" name="name" class="form-control input-lg"  />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-4 text-right">Email:</label>
+                                <label for="email" class="col-md-4 text-right">Email:</label>
                                 <div class="col-md-8">
                                     <input type="text" name="email" class="form-control input-lg" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 text-right">Logo:</label>
-                                <div class="col-md-8">
-                                    <input type="text" name="logo" class="form-control input-lg" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -52,16 +46,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label for="logo" class="col-md-4 text-right">Logo:</label>
+                                <div class="col-md-8">
+                                    <input  type="file" name="logo" id="logo" class="form-control input-lg" />
+                                </div>
+                            </div>
                             <div class="form-group text-right">
-                                <input type="submit" name="add"  class="btn btn-primary input-lg" value="Add" />
+                                <button type="submit" name="add"  class="btn btn-primary input-lg" value="Add" >Add</button>
                             </div>
                         </form>
-
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+      </div>
     </div>
 @endsection

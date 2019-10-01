@@ -139,7 +139,7 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Companies',
+            'text'        => 'Company',
             'url'         => 'admin/companies',
             'icon'        => 'fas fa-archive',
             'label_color' => 'success',

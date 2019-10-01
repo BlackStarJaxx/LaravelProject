@@ -5,6 +5,17 @@
 @stop
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        <br />
+    @endif
+
     <div align="right">
         <a href="{{route('admin.companies.index')}}" class="btn btn-default">Back</a>
     </div>
@@ -13,24 +24,27 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Edit Company</div>
+                    <br />
 
                     <div class="card-body">
-                        <form method="POST" action="{{route('admin.companies.update', $companies->id) }}">
-
+                        <form method="POST" action="{{route('admin.companies.update',[$companies->id]) }}"
+                              enctype="multipart/form-data">
                             @csrf
-                            @method('PATCH')
+                            @method('PUT')
                             Name:
                             <input type="text" name="name" value="{{$companies->name}}" class="form-control" />
                             Email:
-                            <input type="text" name="email" value="{{$companies->surname}}" class="form-control" />
+                            <input type="text" name="email" value="{{$companies->email}}" class="form-control" />
                             Logo:
-                            <input type="text" name="logo" value="{{$companies->company}}" class="form-control" />
+                            <input type="file" name="logo"  value="{{$companies->logo}}" class="form-control" >
                             WebSite:
-                            <input type="text" name="website" value="{{$companies->email}}" class="form-control" />
+                            <input type="text" name="website" value="{{$companies->website}}" class="form-control" />
                             <br />
-                            <input type="submit" value="Save" class="btn btn-primary" />
-
+                            <input type="submit" value="Edit" class="btn btn-primary" />
                         </form>
+
+                    </div>
+
 
                     </div>
                 </div>
