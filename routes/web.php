@@ -18,7 +18,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+//Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 
 Route::middleware (['auth'])->prefix('admin')->name('admin.')->group(function(){
@@ -32,7 +35,7 @@ Route::middleware (['auth'])->prefix('admin')->name('admin.')->group(function(){
 
 Route::get ( '/', function () {
     $companies = \App\Company::all ();
-    return view ( 'admin.companies.index' )->withCompany($companies);
+    return view ( 'admin.companies.index' )->withCompany($companies); // для DataTables
 } );
 
 

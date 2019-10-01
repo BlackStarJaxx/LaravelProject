@@ -1,7 +1,5 @@
 @extends('home')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-
-
 @section('content_header')
     <h1>Companies</h1>
 @stop
@@ -29,6 +27,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @if(isset($companies))
                             @forelse($companies as $company)
                                 <tr>
                                     <td>{{$company->name}}</td>
@@ -51,6 +50,7 @@
                                     <td colspan="2">No records found. </td>
                                 </tr>
                             @endforelse
+                                @endif
                             </tbody>
                         </table>
 

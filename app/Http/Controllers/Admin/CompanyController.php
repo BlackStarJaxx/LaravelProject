@@ -17,7 +17,7 @@ class CompanyController extends Controller
 {
     public function index()
     {
-        $companies=Company::latest()->paginate(1000);
+        $companies = Company::latest()->paginate(1000);
         return view('admin.companies.index' , ["companies"=>$companies])
             ->with((request()->input('page')));
 
@@ -36,7 +36,6 @@ class CompanyController extends Controller
         if($request->logo){
             $path = $request->logo->store('public/uploads');
             $data['logo']=asset(str_replace('public','storage',$path));
-
         }
 
         Mail::to('blackstarjaxx07@gmail.com')->send(new CompanyFormMail($request->all()));
@@ -56,6 +55,7 @@ class CompanyController extends Controller
 
         return view('admin.companies.edit',compact('companies'));
     }
+
     public function update(UpdateCompanyRequest $request, Company $companies, $id )
     {
         $data=$request->validated();

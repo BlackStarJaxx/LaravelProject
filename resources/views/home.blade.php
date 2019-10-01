@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <p>Loot this shit plz ;)</p>
+    <p>Look this shit plz ;)</p>
 @stop
 @section('css')
 {{--    <link rel="stylesheet" href="/css/admin_custom.css">--}}
