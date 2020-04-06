@@ -9,17 +9,17 @@
     @endif
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="card">
                     <br/>
 
                     <div class="card-body">
                         <a href="{{route('admin.companies.create')}}" class="btn btn-sm btn-primary">Add New </a>
                         <br /><br />
-                        <table class="table table-bordered table-hover" id="table">
+                        <table class="table table-bordered table-hover "  id="table">
                             <thead>
                             <tr>
-                                <th class="text-center">Name</th>
+                                <th class="text-center ">Name</th>
                                 <th class="text-center">Email</th>
                                 <th class="text-center">Logo</th>
                                 <th class="text-center">Website</th>
@@ -32,11 +32,11 @@
                                 <tr>
                                     <td>{{$company->name}}</td>
                                     <td>{{$company->email}}</td>
-                                    <td><img class="img-thumbnail img-rounded "  src="{{$company->logo}}" width="" alt=""></td>
+                                    <td><img class="img-thumbnail img-rounded "  src="{{$company->logo}}" width=""  alt=""></td>
                                     <td>{{$company->website}}</td>
                                     <td>
                                         <a href="{{route('admin.companies.edit',$company->id)}}"
-                                           class="btn btn-sm btn-info">Edit</a>
+                                           class="btn btn-sm btn-info">Edit</a> <br><br>
                                         <form method="POST" action="{{route('admin.companies.destroy', $company->id)}}">
                                             @csrf
                                             {{method_field('DELETE')}}

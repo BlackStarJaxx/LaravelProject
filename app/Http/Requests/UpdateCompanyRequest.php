@@ -24,7 +24,7 @@ class UpdateCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'         =>    'required|string|min:5',
+            'name'         =>    'required|string|min:3',
             'email'        =>    'required|email',
             'logo'         =>    'image|max:10000',
             'website'      =>    'url'

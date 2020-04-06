@@ -16,7 +16,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <br/>
 
@@ -31,7 +31,7 @@
                                 <th>Company</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Active</th>
+                                <th>Actions</th>
 
                             </tr>
                             @forelse($data as $employee)
@@ -45,7 +45,7 @@
                                     <td>
 {{--                                        <a href="{{route('admin.employees.show', $employee->id)}}" class="btn btn-primary">Show</a>--}}
                                         <a href="{{route('admin.employees.edit',$employee->id)}}"
-                                           class="btn btn-sm btn-info">Edit</a>
+                                           class="btn btn-sm btn-info">Edit</a><br><br>
                                         <form method="POST" action="{{route('admin.employees.destroy', $employee->id)}}">
                                         @csrf
                                         @method('DELETE')
@@ -60,7 +60,7 @@
                             </tr>
                           @endforelse
                         </table>
-
+                        {{ $data->links() }}
 
                     </div>
                 </div>

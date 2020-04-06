@@ -14,7 +14,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $data=Employee::latest()->paginate(100);
+        $data=Employee::paginate(5);
         return view('admin.employees.index' , compact('data'))
             ->with((request()->input('page')));
 
